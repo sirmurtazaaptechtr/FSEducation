@@ -82,3 +82,4 @@ class SettingController extends Controller
             ->with('success', 'Site settings updated successfully. Changes are now live.');
     }
 }
+

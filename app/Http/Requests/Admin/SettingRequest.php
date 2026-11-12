@@ -66,3 +66,4 @@ class SettingRequest extends FormRequest
         ];
     }
 }
+

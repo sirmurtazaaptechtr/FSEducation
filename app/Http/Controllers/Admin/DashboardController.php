@@ -43,3 +43,4 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact('metrics', 'recentInquiries', 'recentPartnerRequests'));
     }
 }
+

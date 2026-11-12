@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\AffiliationController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CentreController;
+use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MouPartnerController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatController;
@@ -40,29 +46,45 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,editor']
     Route::post('/banners/reorder', [BannerController::class, 'reorder'])->name('banners.reorder');
     Route::resource('banners', BannerController::class);
 
-    // 3. Key Figures (Stats)
+    // 3. Brands
+    Route::resource('brands', BrandController::class);
+
+    // 4. Affiliations (SBTE / NAVTTC)
+    Route::post('/affiliations/reorder', [AffiliationController::class, 'reorder'])->name('affiliations.reorder');
+    Route::resource('affiliations', AffiliationController::class);
+
+    // 5. Centres (5 Campuses)
+    Route::post('/centres/reorder', [CentreController::class, 'reorder'])->name('centres.reorder');
+    Route::delete('/centres/images/{image}', [CentreController::class, 'deleteImage'])->name('centres.images.destroy');
+    Route::resource('centres', CentreController::class);
+
+    // 6. Course Categories
+    Route::post('/course-categories/reorder', [CourseCategoryController::class, 'reorder'])->name('course-categories.reorder');
+    Route::resource('course-categories', CourseCategoryController::class);
+
+    // 7. Courses & Programmes
+    Route::post('/courses/reorder', [CourseController::class, 'reorder'])->name('courses.reorder');
+    Route::resource('courses', CourseController::class);
+
+    // 8. MOU Partners
+    Route::post('/mou-partners/reorder', [MouPartnerController::class, 'reorder'])->name('mou-partners.reorder');
+    Route::resource('mou-partners', MouPartnerController::class);
+
+    // 9. Key Figures (Stats)
     Route::post('/stats/reorder', [StatController::class, 'reorder'])->name('stats.reorder');
     Route::resource('stats', StatController::class);
 
-    // 4. General Partners & Accreditations
+    // 10. General Partners & Accreditations
     Route::post('/partners/reorder', [PartnerController::class, 'reorder'])->name('partners.reorder');
     Route::resource('partners', PartnerController::class);
 
-    // 5. Site Settings (Restricted to Admin Role Only)
+    // 11. Site Settings (Restricted to Admin Role Only)
     Route::middleware('role:admin')->group(function () {
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
     });
 
-    // Stubs for future phases to allow sidebar navigation links to resolve
-    Route::get('/brands', fn () => redirect()->route('admin.dashboard'))->name('brands.index');
-    Route::get('/affiliations', fn () => redirect()->route('admin.dashboard'))->name('affiliations.index');
-    Route::get('/centres', fn () => redirect()->route('admin.dashboard'))->name('centres.index');
-    Route::get('/course-categories', fn () => redirect()->route('admin.dashboard'))->name('course-categories.index');
-    Route::get('/courses', fn () => redirect()->route('admin.dashboard'))->name('courses.index');
-    Route::get('/courses/create', fn () => redirect()->route('admin.dashboard'))->name('courses.create');
-    Route::get('/mou-partners', fn () => redirect()->route('admin.dashboard'))->name('mou-partners.index');
-    Route::get('/mou-partners/create', fn () => redirect()->route('admin.dashboard'))->name('mou-partners.create');
+    // Stubs for Phase 5 content modules so layout sidebar links resolve cleanly
     Route::get('/partner-requests', fn () => redirect()->route('admin.dashboard'))->name('partner-requests.index');
     Route::get('/inquiries', fn () => redirect()->route('admin.dashboard'))->name('inquiries.index');
     Route::get('/reports', fn () => redirect()->route('admin.dashboard'))->name('reports.index');

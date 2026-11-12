@@ -25,3 +25,4 @@ class PartnerRequest extends FormRequest
         ];
     }
 }
+

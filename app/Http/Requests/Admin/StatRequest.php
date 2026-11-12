@@ -23,3 +23,4 @@ class StatRequest extends FormRequest
         ];
     }
 }
+
