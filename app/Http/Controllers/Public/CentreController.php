@@ -66,3 +66,4 @@ class CentreController extends Controller
         return view('public.centres.show', compact('centre', 'courses', 'mouPartners'));
     }
 }
+

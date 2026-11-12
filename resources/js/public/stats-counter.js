@@ -47,3 +47,4 @@ function animateValue(element, start, end, duration) {
 
     window.requestAnimationFrame(step);
 }
+

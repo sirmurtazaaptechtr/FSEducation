@@ -37,3 +37,4 @@ class PartnerRequestController extends Controller
         return back()->with('success', 'Thank you! Your partnership inquiry has been submitted. Our Institutional Partnerships team will contact you shortly.');
     }
 }
+

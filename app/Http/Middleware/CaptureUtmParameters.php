@@ -26,3 +26,4 @@ class CaptureUtmParameters
         return $next($request);
     }
 }
+

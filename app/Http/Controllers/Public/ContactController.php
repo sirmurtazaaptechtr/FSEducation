@@ -22,3 +22,4 @@ class ContactController extends Controller
         return view('public.contact', compact('centres', 'courses', 'mouPartners'));
     }
 }
+

@@ -40,3 +40,4 @@ class InquiryController extends Controller
         return back()->with('success', 'Thank you! Your inquiry has been submitted. Our admissions advisor will contact you shortly.');
     }
 }
+

@@ -59,3 +59,4 @@ class MouPartnerController extends Controller
         return view('public.mou-partners.show', compact('partner', 'applicableCentres', 'applicableCourses'));
     }
 }
+

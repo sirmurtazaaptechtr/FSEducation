@@ -90,3 +90,4 @@ class PageController extends Controller
         return view('public.pages.accreditations', compact('page', 'affiliations', 'approvedCourses'));
     }
 }
+

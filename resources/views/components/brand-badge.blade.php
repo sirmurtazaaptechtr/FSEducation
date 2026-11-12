@@ -15,3 +15,4 @@
 <span {{ $attributes->merge(['class' => 'badge ' . $badgeClass]) }}>
     {{ $name }}
 </span>
+

@@ -118,3 +118,4 @@ class CourseController extends Controller
         return view('public.courses.show', compact('course', 'applicableMous', 'relatedCourses'));
     }
 }
+
