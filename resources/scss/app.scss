@@ -1,0 +1,141 @@
+// Bootstrap Icons
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// Variables custom overrides
+$primary: #0b2f64;       // F.S. Education Signature Deep Navy
+$secondary: #d97706;     // Academic Warm Gold / Amber
+$success: #15803d;
+$info: #0284c7;
+$warning: #ea580c;
+$danger: #dc2626;
+$dark: #0f172a;
+$light: #f8fafc;
+$body-bg: #ffffff;
+$body-color: #1e293b;
+$font-family-sans-serif: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+// Import Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+/* F.S. Education Custom Design System */
+:root {
+  --fs-navy: #0b2f64;
+  --fs-navy-dark: #071e40;
+  --fs-gold: #d97706;
+  --fs-gold-light: #fef3c7;
+  --brand-aptech: #b91c1c;
+  --brand-arena: #d97706;
+  --brand-fs: #0b2f64;
+}
+
+body {
+  overflow-x: hidden;
+  color: #334155;
+  font-family: var(--bs-font-sans-serif);
+}
+
+.bg-fs-navy {
+  background-color: var(--fs-navy) !important;
+  color: #fff;
+}
+
+.text-fs-navy {
+  color: var(--fs-navy) !important;
+}
+
+.bg-fs-gold {
+  background-color: var(--fs-gold) !important;
+  color: #fff;
+}
+
+.text-fs-gold {
+  color: var(--fs-gold) !important;
+}
+
+.border-fs-gold {
+  border-color: var(--fs-gold) !important;
+}
+
+/* Brand badges & labels */
+.badge-brand-fs {
+  background-color: #0b2f64;
+  color: #ffffff;
+}
+
+.badge-brand-aptech {
+  background-color: #b91c1c;
+  color: #ffffff;
+}
+
+.badge-brand-arena {
+  background-color: #d97706;
+  color: #ffffff;
+}
+
+/* Brand border indicator */
+.card-brand-fs {
+  border-top: 4px solid #0b2f64 !important;
+}
+.card-brand-aptech {
+  border-top: 4px solid #b91c1c !important;
+}
+.card-brand-arena {
+  border-top: 4px solid #d97706 !important;
+}
+
+/* Card hover animation */
+.hover-shadow {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-shadow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 58px;
+  height: 58px;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  z-index: 1050;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Cookie banner */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #0f172a;
+  color: #f8fafc;
+  padding: 1rem 1.5rem;
+  z-index: 1060;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.2);
+}
+
+/* Franchise guideline notice box */
+.franchise-guideline-box {
+  background-color: #fffbeb;
+  border-left: 4px solid #d97706;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: #92400e;
+}
