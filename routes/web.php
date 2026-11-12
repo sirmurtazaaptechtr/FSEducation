@@ -3,15 +3,23 @@
 use App\Http\Controllers\Admin\AffiliationController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CentreController;
+use App\Http\Controllers\Admin\CentreController as AdminCentreController;
 use App\Http\Controllers\Admin\CourseCategoryController;
-use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\MouPartnerController;
+use App\Http\Controllers\Admin\MouPartnerController as AdminMouPartnerController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Public\CentreController;
+use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\CourseController;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\InquiryController;
+use App\Http\Controllers\Public\MouPartnerController;
+use App\Http\Controllers\Public\PageController;
+use App\Http\Controllers\Public\PartnerRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +28,51 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-// Public Website Routes (Foundation)
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// ==========================================
+// 1. PUBLIC MARKETING WEBSITE
+// ==========================================
+
+// Homepage (11-section hierarchy)
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Group Institutional Pages (from database pages table)
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/vision-mission', [PageController::class, 'visionMission'])->name('vision-mission');
+Route::get('/network', [PageController::class, 'network'])->name('network');
+Route::get('/why-us', [PageController::class, 'whyUs'])->name('why-us');
+Route::get('/leadership-message', [PageController::class, 'leadershipMessage'])->name('leadership-message');
+Route::get('/accreditations', [PageController::class, 'accreditations'])->name('accreditations');
+
+// Centres / Campuses
+Route::get('/centres', [CentreController::class, 'index'])->name('centres.index');
+Route::get('/centres/{slug}', [CentreController::class, 'show'])->name('centres.show');
+
+// Courses & Programmes
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/courses/{slug}', [CourseController::class, 'show'])->name('courses.show');
+
+// MOU Partners & Student Discounts
+Route::get('/mou-partners', [MouPartnerController::class, 'index'])->name('mou-partners.index');
+Route::get('/mou-partners/{slug}', [MouPartnerController::class, 'show'])->name('mou-partners.show');
+
+// Become a Partner / MOU Collaboration
+Route::get('/become-a-partner', [PartnerRequestController::class, 'showForm'])->name('partner-request.form');
+Route::post('/become-a-partner', [PartnerRequestController::class, 'submit'])
+    ->middleware('throttle:10,1')
+    ->name('partner-request.submit');
+
+// Contact Admissions
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+// Public Admissions & Discount Inquiries (with UTM / Marketing Attribution & Rate Limiting)
+Route::post('/inquiries', [InquiryController::class, 'submit'])
+    ->middleware('throttle:15,1')
+    ->name('inquiries.submit');
+
+
+// ==========================================
+// 2. AUTHENTICATION & DASHBOARD REDIRECT
+// ==========================================
 
 // Redirect generic /dashboard to /admin/dashboard
 Route::get('/dashboard', function () {
@@ -37,7 +86,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Admin Panel Route Group
+
+// ==========================================
+// 3. ADMIN PANEL ROUTE GROUP
+// ==========================================
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,editor'])->group(function () {
     // 1. Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -54,21 +106,21 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,editor']
     Route::resource('affiliations', AffiliationController::class);
 
     // 5. Centres (5 Campuses)
-    Route::post('/centres/reorder', [CentreController::class, 'reorder'])->name('centres.reorder');
-    Route::delete('/centres/images/{image}', [CentreController::class, 'deleteImage'])->name('centres.images.destroy');
-    Route::resource('centres', CentreController::class);
+    Route::post('/centres/reorder', [AdminCentreController::class, 'reorder'])->name('centres.reorder');
+    Route::delete('/centres/images/{image}', [AdminCentreController::class, 'deleteImage'])->name('centres.images.destroy');
+    Route::resource('centres', AdminCentreController::class);
 
     // 6. Course Categories
     Route::post('/course-categories/reorder', [CourseCategoryController::class, 'reorder'])->name('course-categories.reorder');
     Route::resource('course-categories', CourseCategoryController::class);
 
     // 7. Courses & Programmes
-    Route::post('/courses/reorder', [CourseController::class, 'reorder'])->name('courses.reorder');
-    Route::resource('courses', CourseController::class);
+    Route::post('/courses/reorder', [AdminCourseController::class, 'reorder'])->name('courses.reorder');
+    Route::resource('courses', AdminCourseController::class);
 
     // 8. MOU Partners
-    Route::post('/mou-partners/reorder', [MouPartnerController::class, 'reorder'])->name('mou-partners.reorder');
-    Route::resource('mou-partners', MouPartnerController::class);
+    Route::post('/mou-partners/reorder', [AdminMouPartnerController::class, 'reorder'])->name('mou-partners.reorder');
+    Route::resource('mou-partners', AdminMouPartnerController::class);
 
     // 9. Key Figures (Stats)
     Route::post('/stats/reorder', [StatController::class, 'reorder'])->name('stats.reorder');

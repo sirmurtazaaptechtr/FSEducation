@@ -116,7 +116,18 @@ class SampleContentSeeder extends Seeder
 
         $createdCentres = [];
         foreach ($centres as $data) {
-            $createdCentres[$data['slug']] = Centre::updateOrCreate(['slug' => $data['slug']], $data);
+            $centre = Centre::updateOrCreate(['slug' => $data['slug']], $data);
+            $createdCentres[$data['slug']] = $centre;
+
+            // Seed sample facility image for each centre
+            \App\Models\CentreImage::updateOrCreate(
+                ['centre_id' => $centre->id, 'caption' => 'High-Density Computing Laboratory'],
+                [
+                    'path' => 'centres/sample-lab.webp',
+                    'alt_text' => $centre->name . ' Computing Lab',
+                    'sort_order' => 1,
+                ]
+            );
         }
 
         // 2. Course Categories

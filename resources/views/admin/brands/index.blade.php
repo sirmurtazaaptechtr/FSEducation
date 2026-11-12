@@ -95,3 +95,4 @@
     Content, marks, and certificates issued under <strong>Aptech</strong> and <strong>Arena Multimedia</strong> must adhere strictly to franchisor agreements. They must never carry government affiliation badges (SBTE/NAVTTC).
 </div>
 @endsection
+

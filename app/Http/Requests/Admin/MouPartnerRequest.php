@@ -46,3 +46,4 @@ class MouPartnerRequest extends FormRequest
         ];
     }
 }
+

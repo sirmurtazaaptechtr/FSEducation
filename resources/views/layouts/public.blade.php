@@ -215,6 +215,22 @@
         </div>
     </footer>
 
+    @if(setting('show_cookie_notice', true))
+    <!-- Cookie Notice Banner -->
+    <div id="cookie-consent-banner" class="cookie-banner d-none">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <div class="small">
+                <i class="bi bi-cookie me-2 text-warning fs-5"></i>
+                We use cookies and marketing analytics to enhance your experience, measure ad campaign performance, and improve our educational services.
+            </div>
+            <div class="d-flex gap-2 flex-shrink-0">
+                <button type="button" id="cookie-accept-btn" class="btn btn-warning btn-sm fw-semibold px-3">Accept</button>
+                <button type="button" id="cookie-dismiss-btn" class="btn btn-outline-light btn-sm px-3">Dismiss</button>
+            </div>
+        </div>
+    </div>
+    @endif
+
     @stack('scripts')
 </body>
 </html>

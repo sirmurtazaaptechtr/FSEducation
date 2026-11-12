@@ -25,3 +25,4 @@ class BrandRequest extends FormRequest
         ];
     }
 }
+

@@ -24,3 +24,4 @@ class AffiliationRequest extends FormRequest
         ];
     }
 }
+
