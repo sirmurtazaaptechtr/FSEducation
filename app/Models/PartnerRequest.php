@@ -23,3 +23,4 @@ class PartnerRequest extends Model
         return $query->where('status', 'new');
     }
 }
+

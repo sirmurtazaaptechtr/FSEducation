@@ -47,3 +47,4 @@ class GalleryItem extends Model
         return $query->orderBy('sort_order', 'asc');
     }
 }
+

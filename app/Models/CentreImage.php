@@ -30,3 +30,4 @@ class CentreImage extends Model
         return $this->belongsTo(Centre::class);
     }
 }
+

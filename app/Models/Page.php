@@ -17,3 +17,4 @@ class Page extends Model
         'meta_description',
     ];
 }
+

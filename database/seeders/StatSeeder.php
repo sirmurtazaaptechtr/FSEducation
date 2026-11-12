@@ -49,3 +49,4 @@ class StatSeeder extends Seeder
         }
     }
 }
+

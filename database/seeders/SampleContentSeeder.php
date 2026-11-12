@@ -551,3 +551,4 @@ class SampleContentSeeder extends Seeder
         }
     }
 }
+

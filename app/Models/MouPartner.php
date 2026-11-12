@@ -119,3 +119,4 @@ class MouPartner extends Model
         return $this->status === 'Active';
     }
 }
+

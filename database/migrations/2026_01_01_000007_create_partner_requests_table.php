@@ -25,3 +25,4 @@ return new class extends Migration
         Schema::dropIfExists('partner_requests');
     }
 };
+

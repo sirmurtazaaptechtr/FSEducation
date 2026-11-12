@@ -52,3 +52,4 @@ class Banner extends Model
         return $query->orderBy('sort_order', 'asc');
     }
 }
+

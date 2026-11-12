@@ -58,3 +58,4 @@ class Inquiry extends Model
         ]);
     }
 }
+

@@ -36,3 +36,4 @@ class Partner extends Model
         return $query->orderBy('sort_order', 'asc');
     }
 }
+

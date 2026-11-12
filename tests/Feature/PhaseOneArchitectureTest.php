@@ -159,3 +159,4 @@ class PhaseOneArchitectureTest extends TestCase
         $this->assertTrue($hbl->isValidNow());
     }
 }
+

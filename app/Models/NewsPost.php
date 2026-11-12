@@ -42,3 +42,4 @@ class NewsPost extends Model
         return $query->orderByDesc('published_at');
     }
 }
+

@@ -15,3 +15,4 @@ class Setting extends Model
         'group',
     ];
 }
+

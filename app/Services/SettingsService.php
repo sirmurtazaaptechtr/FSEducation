@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 class SettingsService
 {
-    protected const CACHE_KEY = 'app_settings_all';
+    public const CACHE_KEY = 'app_settings_all';
 
     /**
      * Retrieve all settings as key => value array, cached indefinitely.
@@ -31,6 +31,54 @@ class SettingsService
         $all = $this->all();
 
         return array_key_exists($key, $all) ? $all[$key] : $default;
+    }
+
+    /**
+     * Set a setting value and invalidate cache.
+     */
+    public function set(string $key, mixed $value, string $group = 'General'): Setting
+    {
+        $setting = Setting::updateOrCreate(
+            ['key' => $key],
+            ['value' => $value, 'group' => $group]
+        );
+
+        $this->clearCache();
+
+        return $setting;
+    }
+
+    /**
+     * Update multiple settings and invalidate cache.
+     */
+    public function updateMany(array $settings, ?string $defaultGroup = null): void
+    {
+        foreach ($settings as $key => $value) {
+            $existing = Setting::where('key', $key)->first();
+            $group = $existing ? $existing->group : ($defaultGroup ?? 'General');
+
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value, 'group' => $group]
+            );
+        }
+
+        $this->clearCache();
+    }
+
+    /**
+     * Get all settings grouped by group name.
+     */
+    public function getAllByGroup(): array
+    {
+        $records = Setting::all();
+        $grouped = [];
+
+        foreach ($records as $record) {
+            $grouped[$record->group][$record->key] = $record->value;
+        }
+
+        return $grouped;
     }
 
     /**

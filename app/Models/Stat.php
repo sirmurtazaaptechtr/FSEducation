@@ -36,3 +36,4 @@ class Stat extends Model
         return $query->orderBy('sort_order', 'asc');
     }
 }
+

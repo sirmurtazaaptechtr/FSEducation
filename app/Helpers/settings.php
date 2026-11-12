@@ -11,3 +11,4 @@ if (! function_exists('setting')) {
         return app(SettingsService::class)->get($key, $default);
     }
 }
+

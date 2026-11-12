@@ -105,3 +105,4 @@ class PageSeeder extends Seeder
         }
     }
 }
+

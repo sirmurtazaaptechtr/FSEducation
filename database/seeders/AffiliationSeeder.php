@@ -33,3 +33,4 @@ class AffiliationSeeder extends Seeder
         }
     }
 }
+

@@ -61,3 +61,4 @@ class Brand extends Model
         return in_array($this->slug, ['aptech', 'arena-multimedia'], true);
     }
 }
+
